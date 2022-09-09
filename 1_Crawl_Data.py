@@ -58,6 +58,6 @@ with open("C:/Users/User/Documents/Machine Learning/social listening project/Dat
             htmlElem.send_keys(Keys.PAGE_DOWN)
             htmlElem.send_keys(Keys.PAGE_DOWN)
             htmlElem.send_keys(Keys.PAGE_DOWN)
-        #cập nhật 2 ngày trước đó
-        until = until - timedelta(days=2)
-        since = since - timedelta(days=2)  
+        #cập nhật 1 ngày trước đó
+        until = until - timedelta(days=1)
+        since = since - timedelta(days=1)  
