@@ -49,7 +49,7 @@ def loss_function(w,X_val,y_val):
     loss = 0
     for i in range(0,len(y_val)):
         z = sigmoid(np.dot(w, X_val[i].T))
-        loss = loss - (y_val[i]*np.log(z)+(1-y_val[i])*np.log(1-z))
+        loss = loss - (y_val[i]*np.log(z+1e-5)+(1-y_val[i])*np.log(1-z+1e-5))
     return loss
 
 def logistic_sigmoid_regression(X_train, y_train, w_init, eta, tol = 1e-4, max_count = 10000):
@@ -70,16 +70,28 @@ def logistic_sigmoid_regression(X_train, y_train, w_init, eta, tol = 1e-4, max_c
             w_new = w[-1] + eta*(yi - zi)*xi
             count += 1
             # điều kiện dừng vòng lặp
-            if count%check_w_after == 0:     
-                if loss_function(w_new,X_val,y_val)<tol:
+            if count%check_w_after == 0:  
+                count2.append(count)
+                loss_train_new = loss_function(w_new, X_train,y_train)
+                loss_train.append(loss_train_new)
+                loss_val_new = loss_function(w_new, X_val,y_val)
+                loss_val.append(loss_val_new)
+                if loss_val_new<tol:
                     return w[-1]
             w.append(w_new)
     return w[-1]     
 
+count2 = []
+loss_train = []
+loss_val = [] 
 eta = .05   
 d = X_train.shape[1]
 w_init = np.random.randn(1, d)  # lấy random một vector w
 w = logistic_sigmoid_regression(X_train, y_train, w_init, eta).reshape((1,-1))
+
+a = [i for i in count2]
+plt.plot(a,loss_val)
+plt.plot(a,loss_train)
 
 predict = sigmoid(np.dot(w, X_test.T))
 count = 0
