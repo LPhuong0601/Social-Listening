@@ -76,7 +76,7 @@ def logistic_sigmoid_regression(X_train, y_train, w_init, eta, tol = 1e-4, max_c
                 loss_train.append(loss_train_new)
                 loss_val_new = loss_function(w_new, X_val,y_val)
                 loss_val.append(loss_val_new)
-                if w_new -  w[-check_w_after]<tol:
+                if np.linalg.norm(w_new -  w[-check_w_after])<tol:
                     return w[-1]
             w.append(w_new)
     return w[-1]     
