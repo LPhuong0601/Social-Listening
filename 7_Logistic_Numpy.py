@@ -90,8 +90,8 @@ w_init = np.random.randn(1, d)  # lấy random một vector w
 w = logistic_sigmoid_regression(X_train, y_train, w_init, eta).reshape((1,-1))
 
 a = [i for i in count2]
-plt.plot(a,loss_val)
 plt.plot(a,loss_train)
+plt.plot(a,loss_val)
 
 predict = sigmoid(np.dot(w, X_test.T))
 count = 0
