@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import sklearn
 import sklearn.model_selection as model_selection
 from tqdm import tqdm
+from sklearn.metrics import confusion_matrix, precision_recall_curve, f1_score
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 print(f"Using {device} device")
