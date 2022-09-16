@@ -71,12 +71,12 @@ def logistic_sigmoid_regression(X_train, y_train, w_init, eta, tol = 1e-4, max_c
             count += 1
             # điều kiện dừng vòng lặp
             if count%check_w_after == 0:     
-                if loss_function(w_new,X_train,y_train)<eta:
+                if loss_function(w_new,X_val,y_val)<tol:
                     return w[-1]
             w.append(w_new)
     return w[-1]     
 
-eta = .05   # learning rate = 0.05
+eta = .05   
 d = X_train.shape[1]
 w_init = np.random.randn(1, d)  # lấy random một vector w
 w = logistic_sigmoid_regression(X_train, y_train, w_init, eta).reshape((1,-1))
@@ -85,11 +85,11 @@ predict = sigmoid(np.dot(w, X_test.T))
 count = 0
 for i in range(0,len(predict[0])):
     x = predict[0][i]
-    y = y_val[i]
+    y = y_test[i]
     s = x + y
     if (x + y >=1.5) or (x + y <0.5):
         count+=1
     # print("%.4f" %predict[0][i],y_test[i])
 print("Correct label",count)
-print("Number of label",len(y_val))
-print("Accuracy: ",count/len(y_val))
+print("Number of label",len(y_test))
+print("Accuracy: ",count/len(y_test))
